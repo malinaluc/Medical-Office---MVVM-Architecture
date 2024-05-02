@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+    <class name="org.example.model.entity.User" table="user">
+        <id name="idUser" type="java.lang.Integer">
+            <column name="idUser"/>
+            <generator class="identity"/>
+        </id>
+
+        <property name="username"/>
+        <property name="password"/>
+        <property name="role"/>
+    </class>
+</hibernate-mapping>

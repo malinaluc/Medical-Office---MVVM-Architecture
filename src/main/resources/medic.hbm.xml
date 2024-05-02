@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+    <class name="org.example.model.entity.Medic" table="medic">
+        <id name="idMedic" type="java.lang.Integer">
+            <column name="idMedic"/>
+            <generator class="identity"/>
+        </id>
+
+        <property name="name"/>
+        <property name="surname"/>
+        <property name="startTimeProgram"/>
+        <property name="endTimeProgram"/>
+
+
+        <!-- fk  -->
+        <many-to-one name = "idUser" class = "org.example.model.entity.User">
+            <column name = "idUser"/>
+        </many-to-one>
+
+    </class>
+</hibernate-mapping>

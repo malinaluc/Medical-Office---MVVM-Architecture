@@ -43,7 +43,8 @@ public class AdminForm {
     @Bind(value = "text", target = "deleteIDUserTextField.value", type = BindingType.BI_DIRECTIONAL)
     private JTextField deleteIDUserTextField;
     private JButton deleteButton;
-    private JComboBox filtrareUsersComboBox;
+    @Bind(value = "selectedItem", target = "filtrareUsersComboBox", type = BindingType.BI_DIRECTIONAL)
+    private JComboBox<String> filtrareUsersComboBox;
     private JTextArea filtrareUtilizatoriTextArea;
     private JLabel iconLabel;
 
@@ -83,6 +84,12 @@ public class AdminForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adminViewModel.deleteUserCommand.execute();
+            }
+        });
+        filtrareUsersComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                adminViewModel.filterusersCommand.execute();
             }
         });
     }

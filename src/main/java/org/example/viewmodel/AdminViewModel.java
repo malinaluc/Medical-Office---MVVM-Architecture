@@ -19,9 +19,13 @@ public class AdminViewModel {
 
     private final Property<String> deleteIDUserTextField;
 
+    private final Property<String> filtrateUsersComboBox;
+
     public Command createUserCommand;
     public Command updateUserCommand;
     public Command deleteUserCommand;
+
+    public Command filterusersCommand;
 
     public AdminViewModel(AdminForm adminForm){
 
@@ -35,11 +39,13 @@ public class AdminViewModel {
 
         deleteIDUserTextField = PropertyFactory.createProperty("deleteID",this,String.class);
 
+        filtrateUsersComboBox = PropertyFactory.createProperty("filtrareUsersComboBox",this,String.class);
+
         viewAllUsersCommand = new CommandViewAllUsers(this,adminForm);
         createUserCommand = new CommandCreateUser(this,adminForm);
         updateUserCommand = new CommandUpdateUser(this,adminForm);
         deleteUserCommand = new CommandDeleteUser(this,adminForm);
-
+        filterusersCommand = new CommandFilterUsers(this,adminForm);
     }
 
     public String getCreateUsernameTextField() {return createUsernameTextField.get();}
@@ -55,4 +61,13 @@ public class AdminViewModel {
     public String getUpdateIDUserTextField() {return updateIDUserTextField.get();}
 
     public String getDeleteIDUserTextField() {return deleteIDUserTextField.get();}
+
+
+    public String getFiltrateUsersComboBox() {
+        return filtrateUsersComboBox.get();
+    }
+
+    public void setFiltrateUsersComboBox(String s){
+        filtrateUsersComboBox.set(s);
+    }
 }

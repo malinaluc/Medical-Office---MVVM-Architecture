@@ -39,8 +39,10 @@ public class CommandLogin implements Command {
         logDebug("Username = " + username + " and Password = " + password);
 
         if (user != null) {
-            System.out.println("Ar trebui sa se afiseze admin panel");
-             showAdminForm();
+
+            SessionManager.loginUser(user.getIdUser(), user.getUsername(), user.getPassword());
+            if (user.getRole() == 2) showMedicForm();
+            else if (user.getRole() == 1) showAdminForm();
             /*SessionManager.loginUser(user.getIdUser(), user.getUsername(), user.getPassword());
             if (user.getRole() == 2) showMedicForm();
             else if (user.getRole() == 1) showAdminForm();

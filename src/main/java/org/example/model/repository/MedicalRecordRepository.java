@@ -101,7 +101,24 @@ public class MedicalRecordRepository extends AbstractRepository<MedicalRecord> {
             Root<MedicalRecord> root = cq.from(MedicalRecord.class);
 
             // Specify the selection criteria
-            cq.select(root).where(cb.equal(root.get("tratament"), tratament));
+            cq.select(root).where(cb.equal(root.get("treatment"), tratament));
+
+            Query<MedicalRecord> query = session.createQuery(cq);
+            return query.getResultList();
+        } catch (Exception e) {
+            logDebug("---allMedicalRecordByTratament--- " + e);
+            return null;
+        }
+    }
+
+    public List<MedicalRecord> allMedicalRecordByPatientName(String name){
+        try (var session = HibernateUtil.getSessionFactory().openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<MedicalRecord> cq = cb.createQuery(MedicalRecord.class);
+            Root<MedicalRecord> root = cq.from(MedicalRecord.class);
+
+            // Specify the selection criteria
+            cq.select(root).where(cb.equal(root.get("patientName"), name));
 
             Query<MedicalRecord> query = session.createQuery(cq);
             return query.getResultList();
@@ -118,7 +135,7 @@ public class MedicalRecordRepository extends AbstractRepository<MedicalRecord> {
             Root<MedicalRecord> root = cq.from(MedicalRecord.class);
 
             // Specify the selection criteria
-            cq.select(root).where(cb.equal(root.get("varstaPacient"), varsta));
+            cq.select(root).where(cb.equal(root.get("patientAge"), varsta));
 
             Query<MedicalRecord> query = session.createQuery(cq);
             return query.getResultList();

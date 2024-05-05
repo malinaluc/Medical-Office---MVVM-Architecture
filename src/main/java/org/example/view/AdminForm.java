@@ -40,6 +40,7 @@ public class AdminForm {
     @Bind(value = "text", target = "updatePasswordTextField.value", type = BindingType.BI_DIRECTIONAL)
     private JTextField updatePasswordTextField;
     private JButton updateButton;
+    @Bind(value = "text", target = "deleteIDUserTextField.value", type = BindingType.BI_DIRECTIONAL)
     private JTextField deleteIDUserTextField;
     private JButton deleteButton;
     private JComboBox filtrareUsersComboBox;
@@ -76,6 +77,12 @@ public class AdminForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adminViewModel.updateUserCommand.execute();
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                adminViewModel.deleteUserCommand.execute();
             }
         });
     }

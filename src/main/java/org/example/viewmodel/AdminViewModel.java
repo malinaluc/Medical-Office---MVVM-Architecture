@@ -3,11 +3,7 @@ package org.example.viewmodel;
 import net.sds.mvvm.properties.Property;
 import net.sds.mvvm.properties.PropertyFactory;
 import org.example.view.AdminForm;
-import org.example.viewmodel.commands.Command;
-import org.example.viewmodel.commands.CommandCreateUser;
-
-import org.example.viewmodel.commands.CommandUpdateUser;
-import org.example.viewmodel.commands.CommandViewAllUsers;
+import org.example.viewmodel.commands.*;
 
 public class AdminViewModel {
 
@@ -21,8 +17,11 @@ public class AdminViewModel {
     private final Property<String > updatePasswordTextField;
     private final Property<String> updateIDUserTextField;
 
+    private final Property<String> deleteIDUserTextField;
+
     public Command createUserCommand;
     public Command updateUserCommand;
+    public Command deleteUserCommand;
 
     public AdminViewModel(AdminForm adminForm){
 
@@ -34,10 +33,12 @@ public class AdminViewModel {
         updatePasswordTextField = PropertyFactory.createProperty("updatePassword",this,String.class);
         updateIDUserTextField = PropertyFactory.createProperty("updateID",this, String.class);
 
+        deleteIDUserTextField = PropertyFactory.createProperty("deleteID",this,String.class);
 
         viewAllUsersCommand = new CommandViewAllUsers(this,adminForm);
         createUserCommand = new CommandCreateUser(this,adminForm);
         updateUserCommand = new CommandUpdateUser(this,adminForm);
+        deleteUserCommand = new CommandDeleteUser(this,adminForm);
 
     }
 
@@ -53,5 +54,5 @@ public class AdminViewModel {
 
     public String getUpdateIDUserTextField() {return updateIDUserTextField.get();}
 
-
+    public String getDeleteIDUserTextField() {return deleteIDUserTextField.get();}
 }

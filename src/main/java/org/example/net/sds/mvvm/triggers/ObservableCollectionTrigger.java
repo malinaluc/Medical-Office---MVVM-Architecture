@@ -22,7 +22,7 @@ import net.sds.mvvm.bindings.Direction;
 import net.sds.mvvm.collections.ObservableCollection;
 
 public class ObservableCollectionTrigger implements Trigger {
-  private ObservableCollection<?> collection;
+  private final ObservableCollection<?> collection;
   public ObservableCollectionTrigger(ObservableCollection<?> collection) {
     this.collection = collection;
   }

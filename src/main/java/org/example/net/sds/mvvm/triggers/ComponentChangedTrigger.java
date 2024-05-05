@@ -26,8 +26,8 @@ import net.sds.mvvm.bindings.Direction;
  * and applies the binding whenever a matching PropertyChangeEvent is fired.
  */
 public class ComponentChangedTrigger implements Trigger {
-  private JComponent component;
-  private String propertyName;
+  private final JComponent component;
+  private final String propertyName;
 
   public ComponentChangedTrigger(JComponent component, String propertyName) {
     this.component = component;

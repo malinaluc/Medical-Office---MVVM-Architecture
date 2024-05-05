@@ -23,7 +23,7 @@ package net.sds.mvvm.commands;
  * Remark that if the command is not enable, execution will not invoke the runnable.
  */
 public class DefaultRunnableCommand extends AbstractCommand implements RunnableCommand {
-  private Runnable runnable;
+  private final Runnable runnable;
   public DefaultRunnableCommand(Runnable runnable) {
     this.runnable = runnable;
   }

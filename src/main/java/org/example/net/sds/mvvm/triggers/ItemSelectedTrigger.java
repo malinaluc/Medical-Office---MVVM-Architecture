@@ -22,7 +22,7 @@ import net.sds.mvvm.bindings.Binding;
 import net.sds.mvvm.bindings.Direction;
 
 public class ItemSelectedTrigger implements Trigger {
-  private AbstractButton button;
+  private final AbstractButton button;
   public ItemSelectedTrigger(AbstractButton button) {
     this.button = button;
   }

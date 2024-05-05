@@ -26,13 +26,13 @@ import org.apache.commons.lang3.ObjectUtils;
  * @param <T>
  */
 public abstract class AbstractObservableCollectionView<T> extends ObservableArrayList<T> implements CollectionChangedListener<T> {
-  private Collection<T> sourceList;
-  private EventSuppressor suppressor = new EventSuppressor();
+  private final Collection<T> sourceList;
+  private final EventSuppressor suppressor = new EventSuppressor();
 
   protected AbstractObservableCollectionView(Collection<T> sourceList) {
     this.sourceList = sourceList;
     if (sourceList instanceof ObservableCollection) {
-      ObservableCollection.class.cast(this.sourceList).addListener(this);
+      ((ObservableCollection) this.sourceList).addListener(this);
     }
   }
 

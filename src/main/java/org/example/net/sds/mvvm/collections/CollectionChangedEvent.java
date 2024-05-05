@@ -23,11 +23,11 @@ import java.util.Collection;
  * @param <T>
  */
 public abstract class CollectionChangedEvent<T> {
-  private ChangeType changeType;
-  private Collection<? extends T> newItems;
-  private int[] indices;
-  private Collection<? extends T> oldItems;
-  private ObservableCollection<T> source;
+  private final ChangeType changeType;
+  private final Collection<? extends T> newItems;
+  private final int[] indices;
+  private final Collection<? extends T> oldItems;
+  private final ObservableCollection<T> source;
 
   CollectionChangedEvent(ObservableCollection<T> source, ChangeType changeType, Collection<? extends T> newItems, Collection<? extends T> oldItems, int[] indices){
     this.changeType = changeType;

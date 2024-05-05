@@ -27,7 +27,7 @@ import net.sds.mvvm.utils.EventSuppressor;
  * made to this view will be reflected in the wrapped collection.
  */
 public class SortedObservableCollectionView<T> extends AbstractObservableCollectionView<T> {
-  private Comparator<T> comparator;
+  private final Comparator<T> comparator;
 
   public SortedObservableCollectionView(ObservableCollection<T> source, Comparator<T> comparator) {
     super(source);

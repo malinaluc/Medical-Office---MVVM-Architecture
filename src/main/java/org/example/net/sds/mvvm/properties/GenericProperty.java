@@ -25,8 +25,8 @@ import net.sds.mvvm.utils.DefaultNotifyPropertyChanged;
  */
 public class GenericProperty<T> extends DefaultNotifyPropertyChanged implements Property<T> {
   private T value;
-  private String name;
-  private Class<T> propertyType;
+  private final String name;
+  private final Class<T> propertyType;
 
   GenericProperty(String name, Object owner, Class<T> propertyType, T initialValue) {
     super(owner);

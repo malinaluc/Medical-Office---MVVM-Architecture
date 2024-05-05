@@ -22,7 +22,7 @@ import net.sds.mvvm.bindings.Direction;
 import net.sds.mvvm.properties.Property;
 
 public class PropertyTrigger implements Trigger {
-  private Property property;
+  private final Property property;
 
   public PropertyTrigger(Property p) {
     this.property = p;

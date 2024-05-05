@@ -27,7 +27,7 @@ import net.sds.mvvm.bindings.Direction;
  * Will register a listener to the document given, and apply the binding whenever the text changes.
  */
 public class DocumentTextChangedTrigger implements Trigger {
-  private Document document;
+  private final Document document;
 
   public DocumentTextChangedTrigger(Document document) {
     this.document = document;

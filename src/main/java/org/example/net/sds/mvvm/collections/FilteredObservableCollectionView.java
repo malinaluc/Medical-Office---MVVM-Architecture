@@ -31,8 +31,8 @@ import net.sds.mvvm.NotifyPropertyChanged;
  * @param <T>
  */
 public class FilteredObservableCollectionView<T> extends AbstractObservableCollectionView<T> implements PropertyChangeListener {
-  private Predicate<? super T> predicate;
-  private String propertyName;
+  private final Predicate<? super T> predicate;
+  private final String propertyName;
 
   public FilteredObservableCollectionView(Collection<T> source, Predicate<? super T> predicate, String propertyName) {
     super(source);

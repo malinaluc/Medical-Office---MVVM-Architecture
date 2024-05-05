@@ -76,10 +76,10 @@ public class Binder {
 
 
   private static class R {
-    private Object resolvedSource;
-    private Object resolvedTarget;
-    private String resolvedSourcePath;
-    private String resolvedTargetPath;
+    private final Object resolvedSource;
+    private final Object resolvedTarget;
+    private final String resolvedSourcePath;
+    private final String resolvedTargetPath;
     private R(Object source, String sourcePath, Object target, String targetPath) throws BindingException {
       String[] split = sourcePath.split("\\.");
       resolvedSource = resolvePath(source, split);

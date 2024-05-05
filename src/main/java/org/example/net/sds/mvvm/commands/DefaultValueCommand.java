@@ -25,7 +25,7 @@ import java.util.function.Consumer;
  * @param <T>
  */
 public class DefaultValueCommand<T> extends AbstractCommand implements ValueCommand<T> {
-  private Consumer<T> consumer;
+  private final Consumer<T> consumer;
 
   public DefaultValueCommand(Consumer<T> consumer) {
     this.consumer = consumer;

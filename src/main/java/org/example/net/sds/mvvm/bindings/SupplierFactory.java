@@ -27,7 +27,7 @@ import net.sds.mvvm.properties.Property;
  * Tries to figure out a Supplier from an object.
  */
 public class SupplierFactory {
-  private static Map<Class<?>, Function<Object, Supplier>> suppliers = new HashMap<>();
+  private static final Map<Class<?>, Function<Object, Supplier>> suppliers = new HashMap<>();
   private SupplierFactory() {}
 
   static <T> Supplier<T> getSupplier(Object o) {
@@ -47,6 +47,6 @@ public class SupplierFactory {
   }
 
   static {
-    suppliers.put(Property.class, o -> () -> Property.class.cast(o).get());
+    suppliers.put(Property.class, o -> () -> ((Property) o).get());
   }
 }

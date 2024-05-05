@@ -47,31 +47,31 @@ public class TriggerFactory {
 
   static {
     registerTriggerFactory((o, p) -> o instanceof Document && p.equals(Paths.TEXT)
-        , (o, p) -> new DocumentTextChangedTrigger(Document.class.cast(o)));
+        , (o, p) -> new DocumentTextChangedTrigger((Document) o));
 
     registerTriggerFactory((o, p) -> o instanceof JTextComponent && p.equals(Paths.TEXT)
-        , (o, p) -> new DocumentTextChangedTrigger(JTextComponent.class.cast(o).getDocument()));
+        , (o, p) -> new DocumentTextChangedTrigger(((JTextComponent) o).getDocument()));
 
     registerTriggerFactory((o, p) -> o instanceof ObservableCollection
-        , (o, p) -> new ObservableCollectionTrigger(ObservableCollection.class.cast(o)));
+        , (o, p) -> new ObservableCollectionTrigger((ObservableCollection) o));
 
     registerTriggerFactory((o, p) -> o instanceof Property
-        , (o, p) -> new PropertyTrigger(Property.class.cast(o)));
+        , (o, p) -> new PropertyTrigger((Property) o));
 
     registerTriggerFactory((o, p) -> o instanceof JList && (p.equals(Paths.SELECTED_INDEX) || p.equals(Paths.SELECTED_INDICES))
-        , (o, p) -> new ListSelectionTrigger(JList.class.cast(o)));
+        , (o, p) -> new ListSelectionTrigger((JList) o));
 
     registerTriggerFactory((o, p) -> o instanceof JTable && (p.equals(Paths.SELECTED_ROW) || p.equals(Paths.SELECTED_ROWS))
-        , (o, p) -> new ListSelectionTrigger(JTable.class.cast(o)));
+        , (o, p) -> new ListSelectionTrigger((JTable) o));
 
     registerTriggerFactory((o, p) -> o instanceof AbstractButton && p.equals(Paths.SELECTED)
-        , (o, p) -> new ItemSelectedTrigger(AbstractButton.class.cast(o)));
+        , (o, p) -> new ItemSelectedTrigger((AbstractButton) o));
 
     registerTriggerFactory((o, p) -> o instanceof JComboBox && (p.equals(Paths.SELECTED_ITEM))
-            , (o, p) -> new ListSelectionTrigger(JComboBox.class.cast(o)));
+            , (o, p) -> new ListSelectionTrigger((JComboBox) o));
 
     registerTriggerFactory((o, p) -> o instanceof JComponent
-        , (o, p) -> new ComponentChangedTrigger(JComponent.class.cast(o), p));
+        , (o, p) -> new ComponentChangedTrigger((JComponent) o, p));
 
   }
 

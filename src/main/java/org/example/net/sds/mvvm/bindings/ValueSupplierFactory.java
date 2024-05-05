@@ -39,7 +39,7 @@ import javax.swing.text.JTextComponent;
 import net.sds.mvvm.properties.Property;
 
 public class ValueSupplierFactory {
-  private static List<SupplierRegistrator> registrators = new ArrayList<>();
+  private static final List<SupplierRegistrator> registrators = new ArrayList<>();
 
   private ValueSupplierFactory() {
   }
@@ -125,56 +125,56 @@ public class ValueSupplierFactory {
 
   static {
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof Property && s.equals(Paths.VALUE)
-        , (o, s) -> () -> Property.class.cast(o).get()));
+        , (o, s) -> () -> ((Property) o).get()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.TEXT)
-        , (o, s) -> () -> JTextComponent.class.cast(o).getText()));
+        , (o, s) -> () -> ((JTextComponent) o).getText()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JLabel && s.equals(Paths.TEXT)
-        , (o, s) -> () -> JLabel.class.cast(o).getText()));
+        , (o, s) -> () -> ((JLabel) o).getText()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.EDITABLE)
-        , (o, s) -> () -> JTextComponent.class.cast(o).isEditable()));
+        , (o, s) -> () -> ((JTextComponent) o).isEditable()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof Component && s.equals(Paths.ENABLED)
-        , (o, s) -> () -> Component.class.cast(o).isEnabled()));
+        , (o, s) -> () -> ((Component) o).isEnabled()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof Component && s.equals(Paths.VISIBLE)
-        , (o, s) -> () -> Component.class.cast(o).isVisible()));
+        , (o, s) -> () -> ((Component) o).isVisible()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof Component && s.equals(Paths.FOREGROUND)
-        , (o, s) -> () -> Component.class.cast(o).getForeground()));
+        , (o, s) -> () -> ((Component) o).getForeground()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof Component && s.equals(Paths.BACKGROUND)
-        , (o, s) -> () -> Component.class.cast(o).getBackground()));
+        , (o, s) -> () -> ((Component) o).getBackground()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof Component && s.equals(Paths.FONT)
-        , (o, s) -> () -> Component.class.cast(o).getFont()));
+        , (o, s) -> () -> ((Component) o).getFont()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof AbstractButton && s.equals(Paths.SELECTED)
-        , (o, s) -> () -> AbstractButton.class.cast(o).isSelected()));
+        , (o, s) -> () -> ((AbstractButton) o).isSelected()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JComboBox && s.equals(Paths.SELECTED_ITEM)
-        , (o, s) -> () -> JComboBox.class.cast(o).getSelectedItem()));
+        , (o, s) -> () -> ((JComboBox) o).getSelectedItem()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JComboBox && s.equals(Paths.MODEL)
-        , (o, s) -> () -> JComboBox.class.cast(o).getModel()));
+        , (o, s) -> () -> ((JComboBox) o).getModel()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JList && s.equals(Paths.SELECTED_INDEX)
-        , (o, s) -> () -> JList.class.cast(o).getSelectedIndex()));
+        , (o, s) -> () -> ((JList) o).getSelectedIndex()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JList && s.equals(Paths.SELECTED_INDICES)
-        , (o, s) -> () -> JList.class.cast(o).getSelectedIndices()));
+        , (o, s) -> () -> ((JList) o).getSelectedIndices()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JList && s.equals(Paths.MODEL)
-        , (o, s) -> () -> JList.class.cast(o).getModel()));
+        , (o, s) -> () -> ((JList) o).getModel()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JTable && s.equals(Paths.MODEL)
-        , (o, s) -> () -> JTable.class.cast(o).getModel()));
+        , (o, s) -> () -> ((JTable) o).getModel()));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JTable && s.equals(Paths.SELECTED_ROW)
         , (o, s) -> () -> {
-      int[] rows = getSelectedModelRows(JTable.class.cast(o));
+      int[] rows = getSelectedModelRows((JTable) o);
       if (rows.length > 0) {
         return rows[0];
       }
@@ -184,7 +184,7 @@ public class ValueSupplierFactory {
     }));
 
     registrators.add(new SupplierRegistrator((o, s) -> o instanceof JTable && s.equals(Paths.SELECTED_ROWS)
-        , (o, s) -> () -> getSelectedModelRows(JTable.class.cast(o))));
+        , (o, s) -> () -> getSelectedModelRows((JTable) o)));
   }
 
   public static int[] getSelectedModelRows(JTable table) {

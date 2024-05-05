@@ -42,7 +42,7 @@ import javax.swing.text.JTextComponent;
 import net.sds.mvvm.properties.Property;
 
 public class ValueConsumerFactory {
-  private static List<ConsumerRegistrator> registrators = new ArrayList<>();
+  private static final List<ConsumerRegistrator> registrators = new ArrayList<>();
   private ValueConsumerFactory() {}
 
   /**
@@ -136,58 +136,58 @@ public class ValueConsumerFactory {
 
   static {
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Property && s.equals(Paths.VALUE)
-        , (o, s) -> v -> Property.class.cast(o).set(v)));
+        , (o, s) -> v -> ((Property) o).set(v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.TEXT)
-        , (o, s) -> v -> JTextComponent.class.cast(o).setText(v != null ? v.toString() : null)));
+        , (o, s) -> v -> ((JTextComponent) o).setText(v != null ? v.toString() : null)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTextComponent && s.equals(Paths.EDITABLE)
-        , (o, s) -> v -> JTextComponent.class.cast(o).setEditable(Boolean.class.cast(v))));
+        , (o, s) -> v -> ((JTextComponent) o).setEditable((Boolean) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JLabel && s.equals(Paths.TEXT)
-        , (o, s) -> v -> JLabel.class.cast(o).setText(v != null ? v.toString() : null)));
+        , (o, s) -> v -> ((JLabel) o).setText(v != null ? v.toString() : null)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Component && s.equals(Paths.ENABLED)
-        , (o, s) -> v -> Component.class.cast(o).setEnabled(Boolean.class.cast(v))));
+        , (o, s) -> v -> ((Component) o).setEnabled((Boolean) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Component && s.equals(Paths.VISIBLE)
-        , (o, s) -> v -> Component.class.cast(o).setVisible(Boolean.class.cast(v))));
+        , (o, s) -> v -> ((Component) o).setVisible((Boolean) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Component && s.equals(Paths.FOREGROUND)
-        , (o, s) -> v -> Component.class.cast(o).setForeground(Color.class.cast(v))));
+        , (o, s) -> v -> ((Component) o).setForeground((Color) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Component && s.equals(Paths.BACKGROUND)
-        , (o, s) -> v -> Component.class.cast(o).setBackground(Color.class.cast(v))));
+        , (o, s) -> v -> ((Component) o).setBackground((Color) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof Component && s.equals(Paths.FONT)
-        , (o, s) -> v -> Component.class.cast(o).setFont(Font.class.cast(v))));
+        , (o, s) -> v -> ((Component) o).setFont((Font) v)));
     
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof AbstractButton && s.equals(Paths.SELECTED)
-        , (o, s) -> v -> AbstractButton.class.cast(o).setSelected(Boolean.class.cast(v))));
+        , (o, s) -> v -> ((AbstractButton) o).setSelected((Boolean) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JComboBox && s.equals(Paths.SELECTED_ITEM)
-        , (o, s) -> v -> JComboBox.class.cast(o).setSelectedItem(v)));
+        , (o, s) -> v -> ((JComboBox) o).setSelectedItem(v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JComboBox && s.equals(Paths.MODEL)
-        , (o, s) -> v -> JComboBox.class.cast(o).setModel(ComboBoxModel.class.cast(v))));
+        , (o, s) -> v -> ((JComboBox) o).setModel((ComboBoxModel) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JList && s.equals(Paths.SELECTED_INDEX)
-        , (o, s) -> v -> JList.class.cast(o).setSelectedIndex(Integer.class.cast(v))));
+        , (o, s) -> v -> ((JList) o).setSelectedIndex((Integer) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JComboBox && s.equals(Paths.SELECTED_INDICES)
-        , (o, s) -> v -> JList.class.cast(o).setSelectedIndices(int[].class.cast(v))));
+        , (o, s) -> v -> ((JList) o).setSelectedIndices((int[]) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JList && s.equals(Paths.MODEL)
-        , (o, s) -> v -> JList.class.cast(o).setModel(ListModel.class.cast(v))));
+        , (o, s) -> v -> ((JList) o).setModel((ListModel) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTable && s.equals(Paths.MODEL)
-        , (o, s) -> v -> JTable.class.cast(o).setModel(TableModel.class.cast(v))));
+        , (o, s) -> v -> ((JTable) o).setModel((TableModel) v)));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTable && s.equals(Paths.SELECTED_ROW)
-        , (o, s) -> v -> setSelectedRows(JTable.class.cast(o), new Object[] {v})));
+        , (o, s) -> v -> setSelectedRows((JTable) o, new Object[] {v})));
 
     registrators.add(new ConsumerRegistrator((o, s) -> o instanceof JTable && s.equals(Paths.SELECTED_ROWS)
-        , (o, s) -> v -> setSelectedRows(JTable.class.cast(o), Object[].class.cast(v))));
+        , (o, s) -> v -> setSelectedRows((JTable) o, (Object[]) v)));
   }
 
   private static void setSelectedRows(JTable table, Object[] rows) {
@@ -196,7 +196,7 @@ public class ValueConsumerFactory {
       if (rows[i] == null || rows[i].toString().trim().length() == 0) {
         continue;
       }
-      int row = rows[i] instanceof Integer ? Integer.class.cast(rows[i]) : Integer.parseInt(rows[i].toString());
+      int row = rows[i] instanceof Integer ? (Integer) rows[i] : Integer.parseInt(rows[i].toString());
       viewRows.add(table.convertRowIndexToView(row));
     }
     if (viewRows.size() > 0) {

@@ -25,8 +25,8 @@ import java.util.function.Supplier;
  * When applied, the value of the supplier is passed on to the consumer.
  */
 public class BindingLink {
-  private ValueSupplier supplier;
-  private ValueConsumer consumer;
+  private final ValueSupplier supplier;
+  private final ValueConsumer consumer;
 
   BindingLink(ValueSupplier supplier, ValueConsumer consumer) {
     this.supplier = supplier;

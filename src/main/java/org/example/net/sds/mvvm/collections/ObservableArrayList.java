@@ -17,17 +17,12 @@
 
 package net.sds.mvvm.collections;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 public class ObservableArrayList<T> extends ArrayList<T> implements ObservableCollection<T> {
-  private Set<CollectionChangedListener<T>> listeners = new HashSet<>();
+  private final Set<CollectionChangedListener<T>> listeners = new HashSet<>();
 
   public ObservableArrayList() {
   }
@@ -52,7 +47,7 @@ public class ObservableArrayList<T> extends ArrayList<T> implements ObservableCo
   public boolean add(T e) {
     boolean result = super.add(e);
     if (result)
-      notifyListeners(new CollectionElementsAddedEvent(this, Arrays.asList(e), new int[]{size() - 1}));
+      notifyListeners(new CollectionElementsAddedEvent(this, Collections.singletonList(e), new int[]{size() - 1}));
 
     return result;
   }
@@ -74,7 +69,7 @@ public class ObservableArrayList<T> extends ArrayList<T> implements ObservableCo
   @Override
   public void add(int index, T e) {
     super.add(index, e);
-    notifyListeners(new CollectionElementsAddedEvent(this, Arrays.asList(e), new int[]{index}));
+    notifyListeners(new CollectionElementsAddedEvent(this, Collections.singletonList(e), new int[]{index}));
   }
 
   @Override
@@ -95,7 +90,7 @@ public class ObservableArrayList<T> extends ArrayList<T> implements ObservableCo
     int i = indexOf(o);
     boolean result = super.remove(o);
     if (result)
-      notifyListeners(new CollectionElementsRemovedEvent<>(this, Arrays.asList((T) o), new int[]{i}));
+      notifyListeners(new CollectionElementsRemovedEvent<>(this, Collections.singletonList((T) o), new int[]{i}));
 
     return result;
   }
@@ -104,7 +99,7 @@ public class ObservableArrayList<T> extends ArrayList<T> implements ObservableCo
   public T remove(int index) {
     T t = super.remove(index);
     if (t != null)
-      notifyListeners(new CollectionElementsRemovedEvent<>(this, Arrays.asList(t), new int[]{index}));
+      notifyListeners(new CollectionElementsRemovedEvent<>(this, List.of(t), new int[]{index}));
     return t;
   }
 

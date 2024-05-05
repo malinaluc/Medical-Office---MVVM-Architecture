@@ -28,7 +28,7 @@ import net.sds.mvvm.properties.Property;
  * Tries to figure out a Consumer for an object.
  */
 public class ConsumerFactory {
-  private static Map<Class<?>, Function<Object, Consumer>> consumers = new HashMap<>();
+  private static final Map<Class<?>, Function<Object, Consumer>> consumers = new HashMap<>();
   private ConsumerFactory() {}
 
   static Consumer getConsumer(Object o) {
@@ -48,6 +48,6 @@ public class ConsumerFactory {
   }
 
   static {
-    consumers.put(Property.class, o -> s -> Property.class.cast(o).set(s));
+    consumers.put(Property.class, o -> s -> ((Property) o).set(s));
   }
 }

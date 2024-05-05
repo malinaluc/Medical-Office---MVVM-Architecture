@@ -21,7 +21,7 @@ import net.sds.mvvm.properties.Property;
 import net.sds.mvvm.properties.PropertyFactory;
 
 public abstract class AbstractCommand implements Command {
-  private Property<Boolean> enabledProperty = PropertyFactory.createProperty(Properties.ENABLED, this, true);
+  private final Property<Boolean> enabledProperty = PropertyFactory.createProperty(Properties.ENABLED, this, true);
 
   @Override
   public Property<Boolean> getEnabledProperty() {

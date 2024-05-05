@@ -89,6 +89,12 @@ public class MedicForm {
                 medicViewModel.setTimetableCommand.execute();
             }
         });
+        consultatiiButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                medicViewModel.viewAllConsultationsCommand.execute();
+            }
+        });
     }
 
     public JTextArea getVizualizareFiseMedicaleTextArea() {
@@ -97,6 +103,10 @@ public class MedicForm {
 
     public JTextArea getAfisarePacientNumeTextArea() {
         return afisarePacientNumeTextArea;
+    }
+
+    public JTextArea getVizualizareConsultatiiTextArea() {
+        return vizualizareConsultatiiTextArea;
     }
 
     {

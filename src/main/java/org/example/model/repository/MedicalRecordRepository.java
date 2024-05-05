@@ -123,7 +123,7 @@ public class MedicalRecordRepository extends AbstractRepository<MedicalRecord> {
             Query<MedicalRecord> query = session.createQuery(cq);
             return query.getResultList();
         } catch (Exception e) {
-            logDebug("---allMedicalRecordByTratament--- " + e);
+            logDebug("---allMedicalRecordByPatientName--- " + e);
             return null;
         }
     }

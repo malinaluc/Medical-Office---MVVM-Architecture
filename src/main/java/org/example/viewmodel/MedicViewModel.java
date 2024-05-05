@@ -22,6 +22,8 @@ public class MedicViewModel {
     public Command searchPatientByNameCommand;
 
     public Command setTimetableCommand;
+
+    public Command viewAllConsultationsCommand;
     public MedicViewModel(MedicForm medicForm){
 
 
@@ -39,6 +41,7 @@ public class MedicViewModel {
         updateMedicalRecordComand = new CommandMedicUpdateMedicalRecord(this,medicForm);
         searchPatientByNameCommand = new CommandMedicSearchPatientByName(this,medicForm);
         setTimetableCommand = new CommandMedicSetTimetable(this,medicForm);
+        viewAllConsultationsCommand = new CommandMedicViewConsultations(this,medicForm);
 
     }
 

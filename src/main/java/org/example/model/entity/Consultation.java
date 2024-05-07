@@ -23,13 +23,17 @@ public class Consultation {
     private Integer endConsultationHour;
     private String namePatient;
 
-    ///fk to MedicalRecord
-    @ManyToOne
-    @JoinColumn(name = "idfisaMedicala",referencedColumnName = "idfisaMedicala" )
-    private MedicalRecord idMedicalRecord;
+    /*   ///fk to MedicalRecord
+       @ManyToOne
+       @JoinColumn(name = "idfisaMedicala", referencedColumnName = "idfisaMedicala")
+       private MedicalRecord idMedicalRecord;
+   */
+
 
     //fk to Medic
     @ManyToOne
-    @JoinColumn(name = "idMedic" , referencedColumnName = "idMedic")
+    @JoinColumn(name = "idMedic", referencedColumnName = "idMedic")
     private Medic idMedic;
+
+
 }

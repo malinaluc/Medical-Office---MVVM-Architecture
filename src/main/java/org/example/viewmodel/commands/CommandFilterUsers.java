@@ -24,13 +24,13 @@ public class CommandFilterUsers implements Command{
     }
 
     void addItemsComboBox(){
-        adminViewModel.setFiltrateUsersComboBox("Medic");
-        adminViewModel.setFiltrateUsersComboBox("Asistent");
+        adminViewModel.setSelectedFilter("Medic");
+        adminViewModel.setSelectedFilter("Asistent");
     }
 
     void filterUsersByRole(){
 
-        String role = adminViewModel.getFiltrateUsersComboBox();
+        String role = adminViewModel.getSelectedFilter();
         System.out.println("ROL CMBOBOX : " + role);
 
     }

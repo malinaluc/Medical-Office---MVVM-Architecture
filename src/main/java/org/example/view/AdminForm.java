@@ -16,6 +16,8 @@ import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Locale;
 import static org.example.utils.ExtensionFunctions.logDebug;
 
@@ -43,7 +45,8 @@ public class AdminForm {
     @Bind(value = "text", target = "deleteIDUserTextField.value", type = BindingType.BI_DIRECTIONAL)
     private JTextField deleteIDUserTextField;
     private JButton deleteButton;
-    @Bind(value = "selectedItem", target = "filtrareUsersComboBox", type = BindingType.BI_DIRECTIONAL)
+    @Bind(value = "model", target = "filterByRole.value", type = BindingType.TARGET_TO_SOURCE)
+    @Bind(value = "selectedItem", target = "selectedFilter.value", type = BindingType.BI_DIRECTIONAL)
     private JComboBox<String> filtrareUsersComboBox;
     private JTextArea filtrareUtilizatoriTextArea;
     private JLabel iconLabel;
@@ -90,6 +93,15 @@ public class AdminForm {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adminViewModel.filterusersCommand.execute();
+            }
+        });
+        filtrareUsersComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selected = (String) e.getItem();
+                    adminViewModel.setSelectedFilter(selected);
+                }
             }
         });
     }

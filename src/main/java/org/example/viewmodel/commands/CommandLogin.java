@@ -4,6 +4,7 @@ import org.example.model.entity.User;
 import org.example.model.repository.UserRepository;
 import org.example.utils.SessionManager;
 import org.example.view.AdminForm;
+import org.example.view.AsistentForm;
 import org.example.view.LoginForm;
 import org.example.view.MedicForm;
 import org.example.viewmodel.LoginViewModel;
@@ -43,10 +44,7 @@ public class CommandLogin implements Command {
             SessionManager.loginUser(user.getIdUser(), user.getUsername(), user.getPassword());
             if (user.getRole() == 2) showMedicForm();
             else if (user.getRole() == 1) showAdminForm();
-            /*SessionManager.loginUser(user.getIdUser(), user.getUsername(), user.getPassword());
-            if (user.getRole() == 2) showMedicForm();
-            else if (user.getRole() == 1) showAdminForm();
-            else showAsistentForm();*/
+            else showAsistentForm();
             System.out.println(user.getUsername() + " " + user.getPassword());
 
         } else
@@ -82,7 +80,17 @@ public class CommandLogin implements Command {
         medicFrame.setVisible(true);
     }
 
-
+    public void showAsistentForm() {
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(loginForm.getPanel1());
+        frame.setVisible(false);
+        AsistentForm asistentForm = new AsistentForm();
+        JFrame asistentFrame = new JFrame("Asistent Frame");
+        asistentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        asistentFrame.getContentPane().add(asistentForm.getPanel1());
+        asistentFrame.setSize(700, 700);
+        asistentFrame.setLocationRelativeTo(null);
+        asistentFrame.setVisible(true);
+    }
 
 
 

@@ -5,6 +5,8 @@ import net.sds.mvvm.properties.PropertyFactory;
 import org.example.view.AdminForm;
 import org.example.viewmodel.commands.*;
 
+import javax.swing.*;
+
 public class AdminViewModel {
 
     public Command viewAllUsersCommand;
@@ -19,7 +21,8 @@ public class AdminViewModel {
 
     private final Property<String> deleteIDUserTextField;
 
-    private final Property<String> filtrateUsersComboBox;
+    private Property<DefaultComboBoxModel<String>> filterByRole ;
+    private final Property<String> selectedFilter;
 
     public Command createUserCommand;
     public Command updateUserCommand;
@@ -39,7 +42,8 @@ public class AdminViewModel {
 
         deleteIDUserTextField = PropertyFactory.createProperty("deleteID",this,String.class);
 
-        filtrateUsersComboBox = PropertyFactory.createProperty("filtrareUsersComboBox",this,String.class);
+        filterByRole = PropertyFactory.createProperty("filterByRole",this,new DefaultComboBoxModel<>());
+        selectedFilter = PropertyFactory.createProperty("selectedFilter", this,String.class,"");
 
         viewAllUsersCommand = new CommandViewAllUsers(this,adminForm);
         createUserCommand = new CommandCreateUser(this,adminForm);
@@ -62,12 +66,13 @@ public class AdminViewModel {
 
     public String getDeleteIDUserTextField() {return deleteIDUserTextField.get();}
 
-
-    public String getFiltrateUsersComboBox() {
-        return filtrateUsersComboBox.get();
+    public void setSelectedFilter(String selectedFilter){
+        this.selectedFilter.set(selectedFilter);
     }
 
-    public void setFiltrateUsersComboBox(String s){
-        filtrateUsersComboBox.set(s);
+    public String getSelectedFilter() {
+        return selectedFilter.get();
     }
+
+
 }

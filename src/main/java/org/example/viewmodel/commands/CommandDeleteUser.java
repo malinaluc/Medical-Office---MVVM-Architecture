@@ -7,10 +7,10 @@ import org.example.viewmodel.AdminViewModel;
 
 public class CommandDeleteUser implements Command{
 
-    private AdminViewModel adminViewModel;
-    private AdminForm adminForm;
+    private final AdminViewModel adminViewModel;
+    private final AdminForm adminForm;
 
-    private UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
     public CommandDeleteUser(AdminViewModel adminViewModel, AdminForm adminForm){
         this.adminViewModel = adminViewModel;
         this.adminForm = adminForm;

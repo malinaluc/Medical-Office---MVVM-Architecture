@@ -6,10 +6,10 @@ import org.example.view.AdminForm;
 import org.example.viewmodel.AdminViewModel;
 
 public class CommandUpdateUser implements Command{
-    private AdminViewModel adminViewModel;
-    private AdminForm adminForm;
+    private final AdminViewModel adminViewModel;
+    private final AdminForm adminForm;
 
-    private UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
 
     public CommandUpdateUser(AdminViewModel adminViewModel, AdminForm adminForm){
         this.adminViewModel = adminViewModel;

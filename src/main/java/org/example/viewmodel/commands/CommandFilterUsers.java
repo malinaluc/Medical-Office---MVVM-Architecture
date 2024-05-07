@@ -6,10 +6,10 @@ import org.example.viewmodel.AdminViewModel;
 
 public class CommandFilterUsers implements Command{
 
-    private AdminViewModel adminViewModel;
-    private AdminForm adminForm;
+    private final AdminViewModel adminViewModel;
+    private final AdminForm adminForm;
 
-    private UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
 
     public CommandFilterUsers(AdminViewModel adminViewModel, AdminForm adminForm){
         this.adminViewModel = adminViewModel;

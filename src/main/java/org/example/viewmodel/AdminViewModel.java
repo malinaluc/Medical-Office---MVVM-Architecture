@@ -21,7 +21,7 @@ public class AdminViewModel {
 
     private final Property<String> deleteIDUserTextField;
 
-    private Property<DefaultComboBoxModel<String>> filterByRole ;
+    private final Property<DefaultComboBoxModel<String>> filterByRole ;
     private final Property<String> selectedFilter;
 
     public Command createUserCommand;

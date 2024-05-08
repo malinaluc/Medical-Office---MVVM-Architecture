@@ -1,6 +1,6 @@
 package org.example.viewmodel.commands;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class CommandExportJSON implements Command {
 
             ResultSetMetaData rsmd = rs.getMetaData();
             int numColumns = rsmd.getColumnCount();
-            Gson gson = new Gson();
+//            Gson gson = new Gson();
             StringBuilder json = new StringBuilder("[");
 
             while (rs.next()) {

@@ -1,7 +1,7 @@
 package org.example.viewmodel;
 
-import net.sds.mvvm.properties.Property;
-import net.sds.mvvm.properties.PropertyFactory;
+import mvvm.properties.Property;
+import mvvm.properties.PropertyFactory;
 import org.example.view.AdminForm;
 import org.example.viewmodel.commands.*;
 

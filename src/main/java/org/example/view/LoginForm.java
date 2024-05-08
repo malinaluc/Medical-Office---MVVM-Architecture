@@ -2,16 +2,14 @@ package org.example.view;
 
 
 
-import net.sds.mvvm.bindings.Binder;
-import net.sds.mvvm.bindings.BindingException;
+import mvvm.bindings.Binder;
 import org.example.viewmodel.LoginViewModel;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
-import lombok.Getter;
-import net.sds.mvvm.bindings.Bind;
-import net.sds.mvvm.bindings.BindingType;
+import mvvm.bindings.Bind;
+import mvvm.bindings.BindingType;
 
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;

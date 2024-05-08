@@ -146,13 +146,13 @@ public class AsistentForm {
         XMLButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                asistentViewModel.exportXMLFile.execute();
             }
         });
         DOCButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                asistentViewModel.exportDOCFile.execute();
             }
         });
     }

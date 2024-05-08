@@ -39,6 +39,8 @@ public class AsistentViewModel {
     public Command exportCSVFile;
     public Command exportJSONFile;
 
+    public Command exportDOCFile;
+    public Command exportXMLFile;
     public AsistentViewModel(AsistentForm asistentForm) {
 
         updateIDFisaTextField = PropertyFactory.createProperty("updateFisaID", this, String.class);
@@ -80,6 +82,10 @@ public class AsistentViewModel {
         exportCSVFile = new CommandExportCSV(this, asistentForm);
 
         exportJSONFile = new CommandExportJSON(this,asistentForm);
+
+        exportDOCFile = new CommandExportDOC(this,asistentForm);
+
+        exportXMLFile = new CommandExportXML(this,asistentForm);
     }
 
     public String getUpdateIDFisaTextField() {

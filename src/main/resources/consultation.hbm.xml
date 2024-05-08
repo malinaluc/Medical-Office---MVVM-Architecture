@@ -12,12 +12,8 @@
 
 
         <!-- fk  -->
-        <many-to-one name = "idMedicalRecord" class = "org.example.model.entity.MedicalRecord">
-            <column name = "idfisaMedicala"/>
-        </many-to-one>
-
-        <many-to-one name = "idMedic" class = "org.example.model.entity.Medic">
-            <column name = "idMedic"/>
+        <many-to-one name="idMedic" class="org.example.model.entity.Medic">
+            <column name="idMedic"/>
         </many-to-one>
 
     </class>

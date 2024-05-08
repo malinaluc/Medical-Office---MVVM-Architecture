@@ -35,4 +35,6 @@ public class MedicalRecord {
     @ManyToOne
     @JoinColumn(name = "idAsistent", referencedColumnName = "idUser")
     private User idAsistent;
+
+
 }

@@ -37,8 +37,10 @@ public class MedicForm {
     private JTextField treatmentTextField;
     private JButton vizalizareFiseMedicaleButton;
     private JButton actualizareFisaButton;
+    @Bind(value = "model", target = "diagnosticComboBox.value", type = BindingType.BI_DIRECTIONAL)
     private JComboBox diagnosticComboBox;
     private JTextArea filtrareDiagnosticTtextArea;
+    @Bind(value = "model", target = "treatmentComboBox.value", type = BindingType.BI_DIRECTIONAL)
     private JComboBox treatmentComboBox;
     private JTextArea filtrareTreatmentTextArea;
     @Bind(value = "text", target = "cautareNumePacientTextField.value", type = BindingType.BI_DIRECTIONAL)
@@ -107,13 +109,22 @@ public class MedicForm {
         diagnosticComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selected = (String) e.getItem();
+                    medicViewModel.setSelectedFilterDiagnostic(selected);
+                    medicViewModel.filterByDiagnostic.execute();
 
+                }
             }
         });
         treatmentComboBox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selected = (String) e.getItem();
+                    medicViewModel.setSelectedFilterTreatment(selected);
+                    medicViewModel.filterByTreatment.execute();
+                }
             }
         });
     }
@@ -128,6 +139,22 @@ public class MedicForm {
 
     public JTextArea getVizualizareConsultatiiTextArea() {
         return vizualizareConsultatiiTextArea;
+    }
+
+    public JTextArea getFiltrareTreatmentTextArea() {
+        return filtrareTreatmentTextArea;
+    }
+
+    public JTextArea getFiltrareDiagnosticTtextArea() {
+        return filtrareDiagnosticTtextArea;
+    }
+
+    public void populateTreatmentComboBox() {
+        medicViewModel.populateTreatmentComboBox.execute();
+    }
+
+    public void populateDiagnosticComboBoz() {
+        medicViewModel.populateDiagnosticComboBox.execute();
     }
 
     {

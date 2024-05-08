@@ -79,6 +79,8 @@ public class CommandLogin implements Command {
         medicFrame.setSize(700, 700);
         medicFrame.setLocationRelativeTo(null);
         medicFrame.setVisible(true);
+        medicForm.populateTreatmentComboBox();
+        medicForm.populateDiagnosticComboBoz();
     }
 
     public void showAsistentForm() {

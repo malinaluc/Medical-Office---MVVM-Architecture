@@ -6,7 +6,6 @@ import org.example.view.AdminForm;
 import org.example.viewmodel.commands.*;
 
 import javax.swing.*;
-import java.util.List;
 
 public class AdminViewModel {
 
@@ -50,7 +49,7 @@ public class AdminViewModel {
         createUserCommand = new CommandCreateUser(this, adminForm);
         updateUserCommand = new CommandUpdateUser(this, adminForm);
         deleteUserCommand = new CommandDeleteUser(this, adminForm);
-        filterusersCommand = new CommandFilterUsers(this, adminForm);
+        filterusersCommand = new CommandAdminFilterUsers(this, adminForm);
         logOutCommand = new CommandAdminLogOut(this, adminForm);
         populateUserTypeComboBox = new CommandAdminPopulateFilterUserComboBox(this,adminForm);
     }

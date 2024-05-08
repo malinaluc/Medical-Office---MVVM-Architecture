@@ -1,10 +1,7 @@
 package org.example.model.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -27,7 +24,7 @@ public class MedicalRecord {
     private Integer patientAge;
 
     //fk to Medic
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idMedic", referencedColumnName = "idMedic")
     private Medic idMedic;
     //fk to User
@@ -35,6 +32,4 @@ public class MedicalRecord {
     @ManyToOne
     @JoinColumn(name = "idAsistent", referencedColumnName = "idUser")
     private User idAsistent;
-
-
 }

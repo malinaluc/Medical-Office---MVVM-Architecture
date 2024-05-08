@@ -5,6 +5,8 @@ import mvvm.properties.PropertyFactory;
 import org.example.view.AsistentForm;
 import org.example.viewmodel.commands.*;
 
+import javax.swing.*;
+
 public class AsistentViewModel {
 
     private final Property<String> updateIDFisaTextField;
@@ -25,7 +27,13 @@ public class AsistentViewModel {
     private final Property<String> namePacientConsultationTextField;
     private final Property<String> medicAddConsultTextField;
 
+    private Property<DefaultComboBoxModel<String>> filterDiagnosticComboBox;
+    private Property<DefaultComboBoxModel<String>> filterVarstaComboBox;
+    private Property<DefaultComboBoxModel<String>> filterMedicComboBox;
 
+    private String selectedFilterDiagnostic;
+    private String selectedFilterVarsta;
+    private String selectedFilterMedic;
     public Command viewAllMedicalRecords;
 
     public Command updateMedicalRecord;
@@ -41,6 +49,16 @@ public class AsistentViewModel {
 
     public Command exportDOCFile;
     public Command exportXMLFile;
+
+    public Command populateVarstaComboBox;
+    public Command populateMedicComboBox;
+    public Command populateDiagnosticComboBox;
+
+    public Command filterByVarsta;
+    public Command filterByMedic;
+    public Command filterByDiagnostic;
+
+
     public AsistentViewModel(AsistentForm asistentForm) {
 
         updateIDFisaTextField = PropertyFactory.createProperty("updateFisaID", this, String.class);
@@ -65,6 +83,10 @@ public class AsistentViewModel {
         namePacientConsultationTextField = PropertyFactory.createProperty("addConsultnamePatient", this, String.class);
         medicAddConsultTextField = PropertyFactory.createProperty("addConsultMedic", this, String.class);
 
+        filterDiagnosticComboBox = PropertyFactory.createProperty("filterDiagnosticComboBox", this,new DefaultComboBoxModel<>());
+        filterVarstaComboBox = PropertyFactory.createProperty("filterVarstaComboBox", this, new DefaultComboBoxModel<>());
+        filterMedicComboBox = PropertyFactory.createProperty("filterMedicComboBox", this,new DefaultComboBoxModel<>() );
+
         viewAllMedicalRecords = new CommandAsistentViewAllMedicalRecords(this, asistentForm);
 
         updateMedicalRecord = new CommandAsistentUpdateMedicalRecord(this, asistentForm);
@@ -86,6 +108,14 @@ public class AsistentViewModel {
         exportDOCFile = new CommandExportDOC(this,asistentForm);
 
         exportXMLFile = new CommandExportXML(this,asistentForm);
+
+        populateDiagnosticComboBox = new CommandAsistentPopulateDiagnosticCombobox(this,asistentForm);
+        populateMedicComboBox = new CommandAsistentPopulateMedicComboBox(this,asistentForm);
+        populateVarstaComboBox = new CommandAsistentPopulateVarstaComboBox(this,asistentForm);
+
+        filterByVarsta = new CommandAsistentfilterByVarsta(this,asistentForm);
+        filterByMedic = new CommandAsistentFilterByMedic(this,asistentForm);
+        filterByDiagnostic = new CommandAsistentFilterByDiagnostic(this,asistentForm);
     }
 
     public String getUpdateIDFisaTextField() {
@@ -155,5 +185,55 @@ public class AsistentViewModel {
     public String getMedicAddConsultTextField() {
         return medicAddConsultTextField.get();
     }
+
+    public DefaultComboBoxModel<String> getFilterDiagnosticComboBox() {
+        return filterDiagnosticComboBox.get();
+    }
+
+    public void setFilterDiagnosticComboBox(Property<DefaultComboBoxModel<String>> filterDiagnosticComboBox) {
+        this.filterDiagnosticComboBox = filterDiagnosticComboBox;
+    }
+
+    public DefaultComboBoxModel<String> getFilterVarstaComboBox() {
+        return filterVarstaComboBox.get();
+    }
+
+    public void setFilterVarstaComboBox(Property<DefaultComboBoxModel<String>> filterVarstaComboBox) {
+        this.filterVarstaComboBox = filterVarstaComboBox;
+    }
+
+    public DefaultComboBoxModel<String> getFilterMedicComboBox() {
+        return filterMedicComboBox.get();
+    }
+
+    public void setFilterMedicComboBox(Property<DefaultComboBoxModel<String>> filterMedicComboBox) {
+        this.filterMedicComboBox = filterMedicComboBox;
+    }
+
+
+    public String getSelectedFilterDiagnostic() {
+        return selectedFilterDiagnostic;
+    }
+
+    public void setSelectedFilterDiagnostic(String selectedFilterDiagnostic) {
+        this.selectedFilterDiagnostic = selectedFilterDiagnostic;
+    }
+
+    public String getSelectedFilterVarsta() {
+        return selectedFilterVarsta;
+    }
+
+    public void setSelectedFilterVarsta(String selectedFilterVarsta) {
+        this.selectedFilterVarsta = selectedFilterVarsta;
+    }
+
+    public String getSelectedFilterMedic() {
+        return selectedFilterMedic;
+    }
+
+    public void setSelectedFilterMedic(String selectedFilterMedic) {
+        this.selectedFilterMedic = selectedFilterMedic;
+    }
 }
+
 

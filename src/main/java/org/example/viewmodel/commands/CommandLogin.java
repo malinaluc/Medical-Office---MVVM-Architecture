@@ -93,6 +93,9 @@ public class CommandLogin implements Command {
         asistentFrame.setSize(700, 700);
         asistentFrame.setLocationRelativeTo(null);
         asistentFrame.setVisible(true);
+        asistentForm.populateDiagnosticComboBox();
+        asistentForm.populateMedicComboBox();
+        asistentForm.populateVarstaComboBox();
 
     }
 

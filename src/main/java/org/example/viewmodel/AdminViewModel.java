@@ -17,13 +17,13 @@ public class AdminViewModel {
     private final Property<String> updatePasswordTextField;
     private final Property<String> updateIDUserTextField;
     private final Property<String> deleteIDUserTextField;
-    private final Property<DefaultComboBoxModel<String>> filterByRole;
-    private Property<String> selectedFilter;
+    private Property<DefaultComboBoxModel<String>> filtrareUsersComboBox;
+    private String selectedFilter;
     public Command viewAllUsersCommand;
     public Command createUserCommand;
     public Command updateUserCommand;
     public Command deleteUserCommand;
-
+    public Command populateUserTypeComboBox;
     public Command filterusersCommand;
 
     public Command logOutCommand;
@@ -40,8 +40,11 @@ public class AdminViewModel {
 
         deleteIDUserTextField = PropertyFactory.createProperty("deleteID", this, String.class);
 
-        filterByRole = PropertyFactory.createProperty("filterByRole", this, new DefaultComboBoxModel<>());
+       /* filterByRole = PropertyFactory.createProperty("filterByRole", this, new DefaultComboBoxModel<>());
         selectedFilter = PropertyFactory.createProperty("selectedFilter", this, String.class, "");
+*/
+        filtrareUsersComboBox = PropertyFactory.createProperty("filtrareUsersComboBox", this, new DefaultComboBoxModel<>());
+
 
         viewAllUsersCommand = new CommandViewAllUsers(this, adminForm);
         createUserCommand = new CommandCreateUser(this, adminForm);
@@ -49,6 +52,7 @@ public class AdminViewModel {
         deleteUserCommand = new CommandDeleteUser(this, adminForm);
         filterusersCommand = new CommandFilterUsers(this, adminForm);
         logOutCommand = new CommandAdminLogOut(this, adminForm);
+        populateUserTypeComboBox = new CommandAdminPopulateFilterUserComboBox(this,adminForm);
     }
 
     public String getCreateUsernameTextField() {
@@ -80,23 +84,20 @@ public class AdminViewModel {
     }
 
     public String getSelectedFilter() {
-        return selectedFilter.get();
+        return selectedFilter;
     }
 
     public void setSelectedFilter(String selectedFilter) {
-        this.selectedFilter.set(selectedFilter);
+        this.selectedFilter = selectedFilter;
     }
-    public Property<DefaultComboBoxModel<String>> getFilterByRole() {
-        return filterByRole;
+
+    public DefaultComboBoxModel<String> getFiltrareUsersComboBox() {
+        return filtrareUsersComboBox.get();
     }
 
 
-    public void populateFilterByRole(List<String> roles) {
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        for (String role : roles) {
-            model.setSelectedItem(role);
-        }
-        filterByRole.set(model);
+    public void setFiltrareUsersComboBox(Property<DefaultComboBoxModel<String>> filtrareUsersComboBox) {
+        this.filtrareUsersComboBox = filtrareUsersComboBox;
     }
 
 }

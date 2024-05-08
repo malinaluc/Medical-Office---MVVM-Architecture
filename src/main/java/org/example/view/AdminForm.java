@@ -49,22 +49,21 @@ public class AdminForm {
     @Bind(value = "text", target = "deleteIDUserTextField.value", type = BindingType.BI_DIRECTIONAL)
     private JTextField deleteIDUserTextField;
     private JButton deleteButton;
-    @Bind(value = "model", target = "filterByRole.value", type = BindingType.TARGET_TO_SOURCE)
+    /*@Bind(value = "model", target = "filterByRole.value", type = BindingType.TARGET_TO_SOURCE)
     @Bind(value = "selectedItem", target = "selectedFilter.value", type = BindingType.BI_DIRECTIONAL)
+    */
+
+    @Bind(value = "model", target = "filtrareUsersComboBox.value", type = BindingType.BI_DIRECTIONAL)
     private JComboBox<String> filtrareUsersComboBox;
+
     private JTextArea filtrareUtilizatoriTextArea;
     private JLabel iconLabel;
 
-    /* public JPanel getPanel1() {
-        return panel1;
-    }*/
 
     public AdminForm() {
 
         adminViewModel = new AdminViewModel(this);
 
-        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
-        filtrareUsersComboBox = new JComboBox<>(comboBoxModel);
 
         try {
             System.out.println("Inainte de Binder.bind");
@@ -106,7 +105,8 @@ public class AdminForm {
 
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     String selected = (String) e.getItem();
-                    ///adminViewModel.setSelectedFilter(selected);
+                    adminViewModel.setSelectedFilter(selected);
+                    adminViewModel.filterusersCommand.execute();
                 }
             }
         });
@@ -121,8 +121,17 @@ public class AdminForm {
 
     }
 
+    public void populateComboBox() {
+        adminViewModel.populateUserTypeComboBox.execute();
+    }
+
+
     public JTextArea getVizualizareUtilizatoriTextArea() {
         return vizualizareUtilizatoriTextArea;
+    }
+
+    public JTextArea getFiltrareUtilizatoriTextArea() {
+        return filtrareUtilizatoriTextArea;
     }
 
     {

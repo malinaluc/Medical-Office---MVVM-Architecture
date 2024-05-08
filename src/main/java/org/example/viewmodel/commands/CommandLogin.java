@@ -63,6 +63,7 @@ public class CommandLogin implements Command {
         adminFrame.setSize(700, 700);
         adminFrame.setLocationRelativeTo(null);
         adminFrame.setVisible(true);
+        adminForm.populateComboBox();
 
 
     }
@@ -90,6 +91,7 @@ public class CommandLogin implements Command {
         asistentFrame.setSize(700, 700);
         asistentFrame.setLocationRelativeTo(null);
         asistentFrame.setVisible(true);
+
     }
 
 

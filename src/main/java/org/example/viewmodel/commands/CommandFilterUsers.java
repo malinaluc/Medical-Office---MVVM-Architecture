@@ -1,8 +1,14 @@
 package org.example.viewmodel.commands;
 
+import mvvm.properties.Property;
+import mvvm.properties.PropertyFactory;
+import org.example.model.entity.User;
 import org.example.model.repository.UserRepository;
 import org.example.view.AdminForm;
 import org.example.viewmodel.AdminViewModel;
+
+import javax.swing.*;
+import java.util.List;
 
 public class CommandFilterUsers implements Command{
 
@@ -19,19 +25,20 @@ public class CommandFilterUsers implements Command{
 
     @Override
     public void execute(){
-        addItemsComboBox();
-        filterUsersByRole();
+        String selectedRole = adminViewModel.getSelectedFilter();
+        Integer role ;
+        if(selectedRole.equals("Admin")) role = 1;
+        else if(selectedRole.equals("Medic")) role = 2;
+        else role =3;
+
+        adminForm.getFiltrareUtilizatoriTextArea().setText("");
+
+        List<User> allUsers = userRepository.allUsersByUserTypeID(role);
+
+        for(User user : allUsers){
+            adminForm.getFiltrareUtilizatoriTextArea().append("Username : " + user.getUsername() + "\n");
+        }
     }
 
-    void addItemsComboBox(){
-        adminViewModel.setSelectedFilter("Medic");
-        adminViewModel.setSelectedFilter("Asistent");
-    }
 
-    void filterUsersByRole(){
-
-        String role = adminViewModel.getSelectedFilter();
-        System.out.println("ROL CMBOBOX : " + role);
-
-    }
 }

@@ -137,6 +137,24 @@ public class AsistentForm {
                 asistentViewModel.exportCSVFile.execute();
             }
         });
+        JSONButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                asistentViewModel.exportJSONFile.execute();
+            }
+        });
+        XMLButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        DOCButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public JPanel getPanel1() {

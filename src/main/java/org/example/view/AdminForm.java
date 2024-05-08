@@ -17,7 +17,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.List;
+
 
 import static org.example.utils.ExtensionFunctions.logDebug;
 
@@ -60,6 +63,9 @@ public class AdminForm {
 
         adminViewModel = new AdminViewModel(this);
 
+        DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
+        filtrareUsersComboBox = new JComboBox<>(comboBoxModel);
+
         try {
             System.out.println("Inainte de Binder.bind");
             Binder.bind(this, adminViewModel);
@@ -92,27 +98,27 @@ public class AdminForm {
                 adminViewModel.deleteUserCommand.execute();
             }
         });
-        filtrareUsersComboBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                adminViewModel.filterusersCommand.execute();
-            }
-        });
+
         filtrareUsersComboBox.addItemListener(new ItemListener() {
+
             @Override
             public void itemStateChanged(ItemEvent e) {
+
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     String selected = (String) e.getItem();
-                    adminViewModel.setSelectedFilter(selected);
+                    ///adminViewModel.setSelectedFilter(selected);
                 }
             }
         });
+
         logOutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 adminViewModel.logOutCommand.execute();
             }
         });
+
+
     }
 
     public JTextArea getVizualizareUtilizatoriTextArea() {

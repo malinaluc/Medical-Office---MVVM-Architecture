@@ -1,12 +1,22 @@
 package org.example.viewmodel.commands;
 
-//import com.google.gson.Gson;
+import com.google.gson.Gson;
+import org.example.view.AsistentForm;
+import org.example.viewmodel.AsistentViewModel;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 
 public class CommandExportJSON implements Command {
+
+    private final AsistentViewModel asistentViewModel;
+    private final AsistentForm asistentForm;
+    public CommandExportJSON(AsistentViewModel asistentViewModel, AsistentForm asistentForm)
+    {
+        this.asistentViewModel = asistentViewModel;
+        this.asistentForm = asistentForm;
+    }
 
     @Override
     public void execute() {
@@ -20,7 +30,7 @@ public class CommandExportJSON implements Command {
 
             ResultSetMetaData rsmd = rs.getMetaData();
             int numColumns = rsmd.getColumnCount();
-//            Gson gson = new Gson();
+            Gson gson = new Gson();
             StringBuilder json = new StringBuilder("[");
 
             while (rs.next()) {
@@ -44,7 +54,7 @@ public class CommandExportJSON implements Command {
             System.out.println(json);
 
             // Or write it to a file
-            try (FileWriter writer = new FileWriter("data.json")) {
+            try (FileWriter writer = new FileWriter("MedicData.json")) {
                 writer.write(json.toString());
             } catch (IOException e) {
                 e.printStackTrace();

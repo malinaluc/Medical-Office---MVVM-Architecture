@@ -6,6 +6,7 @@ import org.example.view.AdminForm;
 import org.example.viewmodel.commands.*;
 
 import javax.swing.*;
+import java.util.List;
 
 public class AdminViewModel {
 
@@ -17,7 +18,7 @@ public class AdminViewModel {
     private final Property<String> updateIDUserTextField;
     private final Property<String> deleteIDUserTextField;
     private final Property<DefaultComboBoxModel<String>> filterByRole;
-    private final Property<String> selectedFilter;
+    private Property<String> selectedFilter;
     public Command viewAllUsersCommand;
     public Command createUserCommand;
     public Command updateUserCommand;
@@ -85,6 +86,17 @@ public class AdminViewModel {
     public void setSelectedFilter(String selectedFilter) {
         this.selectedFilter.set(selectedFilter);
     }
+    public Property<DefaultComboBoxModel<String>> getFilterByRole() {
+        return filterByRole;
+    }
 
+
+    public void populateFilterByRole(List<String> roles) {
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (String role : roles) {
+            model.setSelectedItem(role);
+        }
+        filterByRole.set(model);
+    }
 
 }

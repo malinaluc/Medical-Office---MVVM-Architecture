@@ -37,6 +37,7 @@ public class AsistentViewModel {
     public Command addConsultation;
     public Command logOutCommand;
     public Command exportCSVFile;
+    public Command exportJSONFile;
 
     public AsistentViewModel(AsistentForm asistentForm) {
 
@@ -77,6 +78,8 @@ public class AsistentViewModel {
         logOutCommand = new CommandAsistentLogOut(this, asistentForm);
 
         exportCSVFile = new CommandExportCSV(this, asistentForm);
+
+        exportJSONFile = new CommandExportJSON(this,asistentForm);
     }
 
     public String getUpdateIDFisaTextField() {

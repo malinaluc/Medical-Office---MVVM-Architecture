@@ -132,6 +132,18 @@ public class AsistentForm {
                 asistentViewModel.addConsultation.execute();
             }
         });
+        logOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                asistentViewModel.logOutCommand.execute();
+            }
+        });
+        CSVButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                asistentViewModel.exportCSVFile.execute();
+            }
+        });
     }
 
     public JPanel getPanel1() {

@@ -17,88 +17,90 @@
 
 package net.sds.mvvm.collections;
 
-import java.util.Collection;
 import net.sds.mvvm.utils.EventSuppressor;
 import org.apache.commons.lang3.ObjectUtils;
 
+import java.util.Collection;
+
 /**
  * Defines a view on an ObservableCollection, allowing eg. to filter the elements, or sort them.
+ *
  * @param <T>
  */
-public abstract class AbstractObservableCollectionView<T> extends ObservableArrayList<T> implements CollectionChangedListener<T> {
-  private final Collection<T> sourceList;
-  private final EventSuppressor suppressor = new EventSuppressor();
+public abstract class AbstractObservableCollectionView<T> extends net.sds.mvvm.collections.ObservableArrayList<T> implements net.sds.mvvm.collections.CollectionChangedListener<T> {
+    private final Collection<T> sourceList;
+    private final EventSuppressor suppressor = new EventSuppressor();
 
-  protected AbstractObservableCollectionView(Collection<T> sourceList) {
-    this.sourceList = sourceList;
-    if (sourceList instanceof ObservableCollection) {
-      ((ObservableCollection) this.sourceList).addListener(this);
+    protected AbstractObservableCollectionView(Collection<T> sourceList) {
+        this.sourceList = sourceList;
+        if (sourceList instanceof net.sds.mvvm.collections.ObservableCollection) {
+            ((net.sds.mvvm.collections.ObservableCollection) this.sourceList).addListener(this);
+        }
     }
-  }
 
-  void initialize() {
-    addAll(sourceList);
-  }
-
-  protected void reset() {
-    try (EventSuppressor closeable = openSuppressor()) {
-      clear();
-      addAll(sourceList);
+    void initialize() {
+        addAll(sourceList);
     }
-  }
 
-  @Override
-  protected void notifyListeners(CollectionChangedEvent<T> e) {
-    if (!suppressor.isActive()) {
-      super.notifyListeners(e);
+    protected void reset() {
+        try (EventSuppressor closeable = openSuppressor()) {
+            clear();
+            addAll(sourceList);
+        }
     }
-  }
 
-  protected EventSuppressor openSuppressor() {
-    return suppressor.open();
-  }
-
-  // ---------------------------------------------------------------------------
-  // region CollectionChangedListener implementation:
-  // ---------------------------------------------------------------------------
-  @Override
-  public void collectionChanged(CollectionChangedEvent<T> e) {
-    switch (e.getChangeType()) {
-      case ADD:
-        for (T t : e.getNewItems())
-          add(t);
-        break;
-      case REMOVE:
-        for (T t : e.getOldItems())
-          remove(t);
-        break;
-      case RESET:
-        reset();
-        break;
+    @Override
+    protected void notifyListeners(net.sds.mvvm.collections.CollectionChangedEvent<T> e) {
+        if (!suppressor.isActive()) {
+            super.notifyListeners(e);
+        }
     }
-  }
-  // endregion
 
-  // ---------------------------------------------------------------------------
-  // region Utility class used to suppress event notification:
-  // ---------------------------------------------------------------------------
-  private static class NotifySuppressor {}
-  // endregion
+    protected EventSuppressor openSuppressor() {
+        return suppressor.open();
+    }
 
+    // ---------------------------------------------------------------------------
+    // region CollectionChangedListener implementation:
+    // ---------------------------------------------------------------------------
+    @Override
+    public void collectionChanged(CollectionChangedEvent<T> e) {
+        switch (e.getChangeType()) {
+            case ADD:
+                for (T t : e.getNewItems())
+                    add(t);
+                break;
+            case REMOVE:
+                for (T t : e.getOldItems())
+                    remove(t);
+                break;
+            case RESET:
+                reset();
+                break;
+        }
+    }
+    // endregion
 
-  // ---------------------------------------------------------------------------
-  // region Overridden as multiple views can register with the same source
-  // collection. If not overridden, only the first one would remain in the
-  // listener set of the source.
-  // ---------------------------------------------------------------------------
-  @Override
-  public boolean equals(Object o) {
-    return o == this;
-  }
+    // ---------------------------------------------------------------------------
+    // region Overridden as multiple views can register with the same source
+    // collection. If not overridden, only the first one would remain in the
+    // listener set of the source.
+    // ---------------------------------------------------------------------------
+    @Override
+    public boolean equals(Object o) {
+        return o == this;
+    }
+    // endregion
 
-  @Override
-  public int hashCode() {
-    return ObjectUtils.identityToString(this).hashCode();
-  }
-  // endregion
+    @Override
+    public int hashCode() {
+        return ObjectUtils.identityToString(this).hashCode();
+    }
+
+    // ---------------------------------------------------------------------------
+    // region Utility class used to suppress event notification:
+    // ---------------------------------------------------------------------------
+    private static class NotifySuppressor {
+    }
+    // endregion
 }

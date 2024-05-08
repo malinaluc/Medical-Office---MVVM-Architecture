@@ -35,6 +35,8 @@ public class AsistentViewModel {
 
     public Command searchPatientByName;
     public Command addConsultation;
+    public Command logOutCommand;
+    public Command exportCSVFile;
 
     public AsistentViewModel(AsistentForm asistentForm) {
 
@@ -71,6 +73,10 @@ public class AsistentViewModel {
         searchPatientByName = new CommandAsistentSearchPatientByName(this, asistentForm);
 
         addConsultation = new CommandAsistentAddConsultation(this, asistentForm);
+
+        logOutCommand = new CommandAsistentLogOut(this, asistentForm);
+
+        exportCSVFile = new CommandExportCSV(this, asistentForm);
     }
 
     public String getUpdateIDFisaTextField() {

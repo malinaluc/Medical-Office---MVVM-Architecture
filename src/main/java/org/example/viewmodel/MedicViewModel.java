@@ -24,24 +24,28 @@ public class MedicViewModel {
     public Command setTimetableCommand;
 
     public Command viewAllConsultationsCommand;
-    public MedicViewModel(MedicForm medicForm){
+
+    public Command logOutCommand;
+
+    public MedicViewModel(MedicForm medicForm) {
 
 
-        IDFisaMedicalaTextField = PropertyFactory.createProperty("updateFisaMedicalaID",this,String.class);
-        symptomsTextField = PropertyFactory.createProperty("updateFisaMedicalasymptoms",this,String.class);
-        diagnostictextField = PropertyFactory.createProperty("updateFisaMedicaladiagnostic",this,String.class);
-        treatmentTextField = PropertyFactory.createProperty("updateFisaMedicalatreatment",this,String.class);
+        IDFisaMedicalaTextField = PropertyFactory.createProperty("updateFisaMedicalaID", this, String.class);
+        symptomsTextField = PropertyFactory.createProperty("updateFisaMedicalasymptoms", this, String.class);
+        diagnostictextField = PropertyFactory.createProperty("updateFisaMedicaladiagnostic", this, String.class);
+        treatmentTextField = PropertyFactory.createProperty("updateFisaMedicalatreatment", this, String.class);
 
-        cautareNumePacientTextField = PropertyFactory.createProperty("numePacient",this,String.class);
+        cautareNumePacientTextField = PropertyFactory.createProperty("numePacient", this, String.class);
 
         startHourMedicTextField = PropertyFactory.createProperty("startHour", this, String.class);
         endDourMedicTextField = PropertyFactory.createProperty("endHour", this, String.class);
 
-        viewAllMedicalRecordsCommand = new CommandMedicViewAllMedicalRecords(this,medicForm);
-        updateMedicalRecordComand = new CommandMedicUpdateMedicalRecord(this,medicForm);
-        searchPatientByNameCommand = new CommandMedicSearchPatientByName(this,medicForm);
-        setTimetableCommand = new CommandMedicSetTimetable(this,medicForm);
-        viewAllConsultationsCommand = new CommandMedicViewConsultations(this,medicForm);
+        viewAllMedicalRecordsCommand = new CommandMedicViewAllMedicalRecords(this, medicForm);
+        updateMedicalRecordComand = new CommandMedicUpdateMedicalRecord(this, medicForm);
+        searchPatientByNameCommand = new CommandMedicSearchPatientByName(this, medicForm);
+        setTimetableCommand = new CommandMedicSetTimetable(this, medicForm);
+        viewAllConsultationsCommand = new CommandMedicViewConsultations(this, medicForm);
+        logOutCommand = new CommandMedicLogOut(this, medicForm);
 
     }
 
@@ -65,10 +69,13 @@ public class MedicViewModel {
         return cautareNumePacientTextField.get();
     }
 
-    public String getStartHourMedicTextField() {return startHourMedicTextField.get();}
+    public String getStartHourMedicTextField() {
+        return startHourMedicTextField.get();
+    }
 
-    public String getEndDourMedicTextField() {return endDourMedicTextField.get();}
-
+    public String getEndDourMedicTextField() {
+        return endDourMedicTextField.get();
+    }
 
 
 }

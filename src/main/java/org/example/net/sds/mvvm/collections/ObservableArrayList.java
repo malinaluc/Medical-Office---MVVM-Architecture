@@ -22,153 +22,153 @@ import java.util.function.Predicate;
 import java.util.function.UnaryOperator;
 
 public class ObservableArrayList<T> extends ArrayList<T> implements ObservableCollection<T> {
-  private final Set<CollectionChangedListener<T>> listeners = new HashSet<>();
+    private final Set<CollectionChangedListener<T>> listeners = new HashSet<>();
 
-  public ObservableArrayList() {
-  }
-
-  public ObservableArrayList(Collection<T> data) {
-    super(data);
-  }
-
-  @Override
-  public T findEntry(Predicate<T> predicate) {
-    Optional<T> result = stream().filter(predicate).findFirst();
-    if (result.isPresent())
-      return result.get();
-    else
-      return null;
-  }
-
-  // ---------------------------------------------------------------------------
-  // region Overrides:
-  // ---------------------------------------------------------------------------
-  @Override
-  public boolean add(T e) {
-    boolean result = super.add(e);
-    if (result)
-      notifyListeners(new CollectionElementsAddedEvent(this, Collections.singletonList(e), new int[]{size() - 1}));
-
-    return result;
-  }
-
-  @Override
-  public boolean addAll(Collection<? extends T> c) {
-    int offset = super.size();
-    boolean result = super.addAll(c);
-    if (result) {
-      int[] indices = new int[c.size()];
-      for (int i = 0; i < c.size(); i++)
-        indices[i] = offset + i;
-      notifyListeners(new CollectionElementsAddedEvent(this, c, indices));
+    public ObservableArrayList() {
     }
 
-    return result;
-  }
-
-  @Override
-  public void add(int index, T e) {
-    super.add(index, e);
-    notifyListeners(new CollectionElementsAddedEvent(this, Collections.singletonList(e), new int[]{index}));
-  }
-
-  @Override
-  public boolean addAll(int index, Collection<? extends T> c) {
-    boolean result = super.addAll(index, c);
-    if (result) {
-      int[] indices = new int[c.size()];
-      for (int i = 0; i < c.size(); i++)
-        indices[i] = index + i;
-      notifyListeners(new CollectionElementsAddedEvent<>(this, c, indices));
+    public ObservableArrayList(Collection<T> data) {
+        super(data);
     }
-    return result;
-  }
 
-  @SuppressWarnings("unchecked")
-  @Override
-  public boolean remove(Object o) {
-    int i = indexOf(o);
-    boolean result = super.remove(o);
-    if (result)
-      notifyListeners(new CollectionElementsRemovedEvent<>(this, Collections.singletonList((T) o), new int[]{i}));
+    @Override
+    public T findEntry(Predicate<T> predicate) {
+        Optional<T> result = stream().filter(predicate).findFirst();
+        if (result.isPresent())
+            return result.get();
+        else
+            return null;
+    }
 
-    return result;
-  }
+    // ---------------------------------------------------------------------------
+    // region Overrides:
+    // ---------------------------------------------------------------------------
+    @Override
+    public boolean add(T e) {
+        boolean result = super.add(e);
+        if (result)
+            notifyListeners(new CollectionElementsAddedEvent(this, Collections.singletonList(e), new int[]{size() - 1}));
 
-  @Override
-  public T remove(int index) {
-    T t = super.remove(index);
-    if (t != null)
-      notifyListeners(new CollectionElementsRemovedEvent<>(this, List.of(t), new int[]{index}));
-    return t;
-  }
+        return result;
+    }
 
-  @Override
-  public boolean removeAll(Collection<?> c) {
-    boolean result = super.removeAll(c);
-    if (result)
-      notifyListeners(new CollectionResetEvent<>(this));
-    return result;
-  }
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        int offset = super.size();
+        boolean result = super.addAll(c);
+        if (result) {
+            int[] indices = new int[c.size()];
+            for (int i = 0; i < c.size(); i++)
+                indices[i] = offset + i;
+            notifyListeners(new CollectionElementsAddedEvent(this, c, indices));
+        }
 
-  @Override
-  public boolean removeIf(Predicate<? super T> filter) {
-    boolean result = super.removeIf(filter);
-    if (result)
-      notifyListeners(new CollectionResetEvent<>(this));
-    return result;
-  }
+        return result;
+    }
 
-  @Override
-  public void removeRange(int fromIndex, int toIndex) {
-    super.removeRange(fromIndex, toIndex);
-    notifyListeners(new CollectionResetEvent<>(this));
-  }
+    @Override
+    public void add(int index, T e) {
+        super.add(index, e);
+        notifyListeners(new CollectionElementsAddedEvent(this, Collections.singletonList(e), new int[]{index}));
+    }
 
-  @Override
-  public void replaceAll(UnaryOperator<T> operator) {
-    super.replaceAll(operator);
-    notifyListeners(new CollectionResetEvent<>(this));
-  }
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        boolean result = super.addAll(index, c);
+        if (result) {
+            int[] indices = new int[c.size()];
+            for (int i = 0; i < c.size(); i++)
+                indices[i] = index + i;
+            notifyListeners(new CollectionElementsAddedEvent<>(this, c, indices));
+        }
+        return result;
+    }
 
-  @Override
-  public boolean retainAll(Collection<?> c) {
-    boolean result = super.retainAll(c);
-    if (result)
-      notifyListeners(new CollectionResetEvent<>(this));
-    return result;
-  }
+    @SuppressWarnings("unchecked")
+    @Override
+    public boolean remove(Object o) {
+        int i = indexOf(o);
+        boolean result = super.remove(o);
+        if (result)
+            notifyListeners(new CollectionElementsRemovedEvent<>(this, Collections.singletonList(o), new int[]{i}));
 
-  @Override
-  public void clear() {
-    int size = size();
-    Collection<T> old = new ArrayList<>(size());
-    old.addAll(this);
-    int[] indices = new int[size()];
-    for (int i = 0; i < indices.length; i++)
-      indices[i] = i;
-    super.clear();
-    if (size > 0)
-      notifyListeners(new CollectionElementsRemovedEvent<>(this, old, indices));
-  }
-  // endregion
+        return result;
+    }
 
-  // ---------------------------------------------------------------------------
-  // region ObservableCollection implementation:
-  // ---------------------------------------------------------------------------
-  @Override
-  public void addListener(CollectionChangedListener<T> l) {
-    listeners.add(l);
-  }
+    @Override
+    public T remove(int index) {
+        T t = super.remove(index);
+        if (t != null)
+            notifyListeners(new CollectionElementsRemovedEvent<>(this, List.of(t), new int[]{index}));
+        return t;
+    }
 
-  @Override
-  public void removeListener(CollectionChangedListener<T> l) {
-    listeners.remove(l);
-  }
-  // endregion
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        boolean result = super.removeAll(c);
+        if (result)
+            notifyListeners(new CollectionResetEvent<>(this));
+        return result;
+    }
 
-  protected void notifyListeners(CollectionChangedEvent<T> e) {
-    for (CollectionChangedListener<T> l : listeners)
-      l.collectionChanged(e);
-  }
+    @Override
+    public boolean removeIf(Predicate<? super T> filter) {
+        boolean result = super.removeIf(filter);
+        if (result)
+            notifyListeners(new CollectionResetEvent<>(this));
+        return result;
+    }
+
+    @Override
+    public void removeRange(int fromIndex, int toIndex) {
+        super.removeRange(fromIndex, toIndex);
+        notifyListeners(new CollectionResetEvent<>(this));
+    }
+
+    @Override
+    public void replaceAll(UnaryOperator<T> operator) {
+        super.replaceAll(operator);
+        notifyListeners(new CollectionResetEvent<>(this));
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        boolean result = super.retainAll(c);
+        if (result)
+            notifyListeners(new CollectionResetEvent<>(this));
+        return result;
+    }
+
+    @Override
+    public void clear() {
+        int size = size();
+        Collection<T> old = new ArrayList<>(size());
+        old.addAll(this);
+        int[] indices = new int[size()];
+        for (int i = 0; i < indices.length; i++)
+            indices[i] = i;
+        super.clear();
+        if (size > 0)
+            notifyListeners(new CollectionElementsRemovedEvent<>(this, old, indices));
+    }
+    // endregion
+
+    // ---------------------------------------------------------------------------
+    // region ObservableCollection implementation:
+    // ---------------------------------------------------------------------------
+    @Override
+    public void addListener(CollectionChangedListener<T> l) {
+        listeners.add(l);
+    }
+
+    @Override
+    public void removeListener(CollectionChangedListener<T> l) {
+        listeners.remove(l);
+    }
+    // endregion
+
+    protected void notifyListeners(CollectionChangedEvent<T> e) {
+        for (CollectionChangedListener<T> l : listeners)
+            l.collectionChanged(e);
+    }
 }

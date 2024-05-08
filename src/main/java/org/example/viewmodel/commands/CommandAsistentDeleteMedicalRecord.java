@@ -9,14 +9,14 @@ import org.example.viewmodel.AsistentViewModel;
 
 public class CommandAsistentDeleteMedicalRecord implements Command {
 
-    private AsistentViewModel asistentViewModel;
-    private AsistentForm asistentForm;
+    private final AsistentViewModel asistentViewModel;
+    private final AsistentForm asistentForm;
 
-    private MedicalRecordRepository medicalRecordRepository = new MedicalRecordRepository();
+    private final MedicalRecordRepository medicalRecordRepository = new MedicalRecordRepository();
 
-    private MedicRepository medicRepository = new MedicRepository();
+    private final MedicRepository medicRepository = new MedicRepository();
 
-    private UserRepository userRepository = new UserRepository();
+    private final UserRepository userRepository = new UserRepository();
 
     public CommandAsistentDeleteMedicalRecord(AsistentViewModel asistentViewModel, AsistentForm asistentForm) {
         this.asistentViewModel = asistentViewModel;

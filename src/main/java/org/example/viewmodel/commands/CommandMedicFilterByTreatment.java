@@ -1,0 +1,35 @@
+package org.example.viewmodel.commands;
+
+import org.example.model.entity.MedicalRecord;
+import org.example.model.repository.MedicalRecordRepository;
+import org.example.view.MedicForm;
+import org.example.viewmodel.MedicViewModel;
+
+import java.util.List;
+
+public class CommandMedicFilterByTreatment implements Command{
+    private final MedicViewModel medicViewModel;
+    private final MedicForm medicForm;
+    private final MedicalRecordRepository medicalRecordRepository = new MedicalRecordRepository();
+
+    public CommandMedicFilterByTreatment(MedicViewModel medicViewModel, MedicForm medicForm){
+        this.medicViewModel = medicViewModel;
+        this.medicForm = medicForm;
+    }
+
+    @Override
+    public void execute(){
+        String selectedTreatment = medicViewModel.getSelectedFilterTreatment();
+
+        List<MedicalRecord> allMedicalRecords = medicalRecordRepository.allMedicalRecordByTratament(selectedTreatment);
+
+        medicForm.getFiltrareTreatmentTextArea().setText("");
+
+        for (MedicalRecord fisaMedicala : allMedicalRecords) {
+            medicForm.getFiltrareTreatmentTextArea().append("Numar Fisa: " + fisaMedicala.getIdfisaMedicala().toString() + "\n" + fisaMedicala.getPatientName() + "\n" + "Diagnostic: " + fisaMedicala.getDiagnostic() + ", Simptome: " +
+                    fisaMedicala.getSymptoms() + "\n" + ", Tratament: " + fisaMedicala.getTreatment() + ", Varsta Pacient: " + fisaMedicala.getPatientAge().toString() + "\n" + "\n");
+
+        }
+    }
+
+}

@@ -66,7 +66,7 @@
             </constraints>
             <properties>
               <background color="-2383653"/>
-              <text value="Button"/>
+              <text value="Login"/>
             </properties>
           </component>
           <component id="146ed" class="javax.swing.JLabel">

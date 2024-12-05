@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<medics>
+  <medic>
+    <idMedic>1</idMedic>
+    <name>Pop</name>
+    <surname>Ion</surname>
+    <idUser>4</idUser>
+    <startTimeProgram>15</startTimeProgram>
+    <endTimeProgram>20</endTimeProgram>
+  </medic>
+  <medic>
+    <idMedic>2</idMedic>
+    <name>Popescu</name>
+    <surname>Mircea</surname>
+    <idUser>2</idUser>
+    <startTimeProgram>18</startTimeProgram>
+    <endTimeProgram>19</endTimeProgram>
+  </medic>
+</medics>

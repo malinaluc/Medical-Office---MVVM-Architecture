@@ -26,6 +26,7 @@ public class User {
 
     private String username;
     private String password;
+
     /**
      * Role of the user.
      * Possible values:
@@ -33,6 +34,8 @@ public class User {
      * 2 -> Medic
      * 3 -> Assistant
      */
+
+
     @NotNull
     private Integer role;
 
